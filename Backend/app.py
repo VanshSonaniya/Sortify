@@ -11,7 +11,7 @@ import os
 # Loading .env which consists of all the API's and secret keys.
 load_dotenv()
 
-template_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../Frontend/templates'))
+template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../Frontend/templates')
 
 # Initialize the Flask app with custom template folder path
 app = Flask(__name__, template_folder=template_path)
@@ -185,19 +185,18 @@ def search():
 
 @app.route("/all_users")
 def all_users():
-    
-    conn = sqlite3.connect("users.db")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.abspath(os.path.join(base_dir, '../DataBase/users.db'))
+
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Fetching user details
     cursor.execute("SELECT name, emailId FROM users")
     rows = cursor.fetchall()
     conn.close()
 
     users = [{"name": name, "emailId": email} for name, email in rows]
-
     return render_template("all_users.html", users=users)
-
 
 # Route to see the  top picks of all the different users (Based on a fake AI Score.)
 @app.route("/user_top_picks/<username>")

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">
+        Top Picks{% if current_user %} for {{ current_user }}{% endif %}
+    </h2>
+
+    {% if picks %}
+    <div class="row">
+        {% for item in picks %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text"><strong>Source:</strong> {{ item.tag }}</p>
+                    <a href="{{ item.link }}" target="_blank" class="btn btn-primary">View Content</a>
+                    <p class="mt-2 mb-0">⭐ <strong>AI Score:</strong> {{ item.score }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">
+        No top picks available at the moment.
+    </div>
+    {% endif %}
+
+    {% if show_users_btn %}
+    <div class="text-center mt-4">
+        <a href="/all_users" class="btn btn-outline-secondary">🔍 View All Users</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

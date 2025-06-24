@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Sortify - Categories{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📂 Explore by Categories</h2>
+
+{% for category in categories %}
+  <h4 class="mt-4">{{ category.name }}</h4>
+  <div class="d-flex overflow-auto mb-4 p-2 bg-light rounded shadow-sm">
+
+    <!-- YouTube Videos -->
+    {% for video in category.videos %}
+    <div class="card me-3" style="min-width: 300px;">
+      <div class="ratio ratio-16x9">
+        <iframe src="https://www.youtube.com/embed/{{ video.video_id }}" allowfullscreen></iframe>
+      </div>
+      <div class="card-body">
+        <h6 class="card-title">{{ video.title }}</h6>
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- News Articles -->
+    {% for article in category.blogs %}
+    <div class="card me-3" style="min-width: 300px;">
+      <div class="card-body">
+        <h6 class="card-title">{{ article.title }}</h6>
+        <p class="card-text small">{{ article.description }}</p>
+        <a href="{{ article.url }}" class="btn btn-sm btn-outline-primary" target="_blank">Read</a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+{% endfor %}
+
+{% endblock %}

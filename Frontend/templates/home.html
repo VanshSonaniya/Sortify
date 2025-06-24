@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Sortify - Home{% endblock %}
+
+{% block content %}
+  <!-- ✅ YouTube Videos Section -->
+  <h2 class="mb-4">📺 Latest YouTube Videos</h2>
+  <div class="row">
+    {% for video in videos %}
+    <div class="col-md-6 video-card">
+      <div class="card">
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/{{ video.video_id }}" allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ video.title }}</h5>
+          <p class="card-text">{{ video.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <hr class="my-4">
+
+  <!-- ✅ News Blogs Section -->
+  <h2 class="mb-4">📰 Latest Blog Posts</h2>
+  <div class="row">
+    {% for blog in blogs %}
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <p class="card-text">{{ blog.description }}</p>
+          <a href="{{ blog.url }}" target="_blank" class="btn btn-sm btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

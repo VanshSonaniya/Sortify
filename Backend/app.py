@@ -11,6 +11,7 @@ import os
 # Loading .env which consists of all the API's and secret keys.
 load_dotenv()
 
+#Setting the path for the templates folder
 template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../Frontend/templates')
 
 # Initialize the Flask app with custom template folder path
@@ -309,4 +310,5 @@ def top_picks():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
